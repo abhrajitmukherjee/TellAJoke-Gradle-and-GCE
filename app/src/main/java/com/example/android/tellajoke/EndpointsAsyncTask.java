@@ -1,13 +1,9 @@
 package com.example.android.tellajoke;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.ProgressBar;
 
-import com.example.android.jokelibrary.*;
 import com.example.jokegce.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -40,7 +36,7 @@ abstract class EndpointsAsyncTask extends AsyncTask<Context, Void, String> imple
 
         if(myApiService == null) {
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
-                    new AndroidJsonFactory(), null)
+                    new AndroidJsonFactory(),null)
                     .setRootUrl(BuildConfig.LocalServer)
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
@@ -53,6 +49,7 @@ abstract class EndpointsAsyncTask extends AsyncTask<Context, Void, String> imple
 //                    .setRootUrl(BuildConfig.BaseEndPoint);
 
             myApiService = builder.build();
+
         }
 
 
@@ -65,12 +62,9 @@ abstract class EndpointsAsyncTask extends AsyncTask<Context, Void, String> imple
 
     @Override
     protected void onPostExecute(String result) {
-        Intent sendIntent = new Intent(context, JokeReveal.class);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, result);
-        sendIntent.setType("text/plain");
-        spinner= (ProgressBar) ((Activity) context).findViewById(R.id.progressBar1);
-        spinner.setVisibility(View.GONE);
-        context.startActivity(sendIntent);
+        if (result!=null){
+            receiveData(result,context);
+        }
 
 
     }

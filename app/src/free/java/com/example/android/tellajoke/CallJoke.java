@@ -38,6 +38,11 @@ public class CallJoke {
             public void onAdClosed() {
                 mEpas.execute(activity);
             }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                mEpas.execute(activity);
+            }
         });
 
     }
