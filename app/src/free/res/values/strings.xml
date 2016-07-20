@@ -1,0 +1,7 @@
+<resources>
+    <string name="header_text">You are using the ad supported free version</string>
+    <string name="app_name">Tell A Joke- Free Edition</string>
+
+    <string name="test_device_id">YOUR DEVICE</string>
+    <string name="banner_ad_unit_id">YOUR PUBLISHER</string>
+</resources>
