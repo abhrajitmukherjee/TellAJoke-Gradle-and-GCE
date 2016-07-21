@@ -21,3 +21,28 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task serverAndTests  (dependsOn:":backendGCE:appengineRun") {
+    evaluationDependsOn ":backendGCE"
+
+    project(":backendGCE") {
+        appengine {
+            daemon true
+        }
+
+    }
+    finalizedBy{
+        ":app:connectedAndroidTest"
+
+    }
+}
+task runTest{
+    dependsOn serverAndTests
+
+    finalizedBy{
+        ":backendGCE:appengineStop"
+    }
+
+}
+
+
